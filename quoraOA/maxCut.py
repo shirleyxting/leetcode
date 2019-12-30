@@ -56,6 +56,24 @@ class Solution:
         Example
         For L=[232, 124, 456], k=7, return 114.
         """
+        """
+        Given a list representing the length of ribbon, and the target number "k" parts of ribbon.
+        we want to cut ribbon into k parts with the same size, at the same time we want the maximum size.
+        
+        Ex.
+        Input: A = [1, 2, 3, 4, 9], k = 5
+        Output: 3
+        
+        Explanation:
+        if size = 1, [1//1, 2//1, 3//1, 4//1, 9//1] -> sum([1, 2, 3, 4, 9]) = 19 parts
+        if seize‍‍‌‌‍‌‍‌‌‍‍‍‍‍‌‌‍‍‌ = 2, [1//2, 2//2, 3//2, 4//2, 9//2] -> sum([0, 1, 1, 2, 4]) = 8 parts
+        if size = 3, then we have 5 parts
+        if size = 4, then we have 3 parts, which is not enough.
+        So return the max size = 3.
+        
+        Sol.
+        Use binary search to find the size of ribbon to reach the time limit.
+        """
         # Binary Search
         max_l = max(L)
 
