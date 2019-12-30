@@ -51,21 +51,23 @@ class Solution:
         sum_row = num_row - k + 1
         sum_col = num_col - k + 1
         sums = [[0 for i in range(sum_col)] for j in range(sum_row)]
-
-        tmp = 0
+        max_sum = 0
 
         for i in range(sum_row):
             for j in range(sum_col):
                 for kk in range(k):
                     sums[i][j] += sum(matrix[i+kk][j:j+k])
+                if sums[i][j] > max_sum:
+                    max_sum = sums[i][j]
 
-        locs = np.argwhere(sums == np.max(sums))
-        unique_vals = []
-        for loc in locs:
-            i, j = loc
-            unique_vals += np.unique(matrix[i:i+k, j:j+k]).tolist()
+        max_vals = []
+        for i in range(sum_row):
+            for j in range(sum_col):
+                if sums[i][j] == max_sum:
+                    for kk in range(k):
+                        max_vals += matrix[i+kk][j:j+k]
 
-        result = sum(set(unique_vals))
+        result = sum(set(max_vals))
 
         return result
 
@@ -79,10 +81,14 @@ print(test.maxSumSubmatrix(
      [4,2,2,3,2],
      [3,1,1,2,2],
      [2,1,1,0,2]],
-    3))
-print(test.maxSumSubmatrix_np(
+    3))         # 10
+print(test.maxSumSubmatrix(
     [[1,2,3,4,7],
      [4,2,2,3,8],
      [3,11,9,2,2],
      [2,1,2,0,2]],
-    3))
+    3))         # 33
+print(test.maxSumSubmatrix(
+    [[1,2,3],
+     [4,2,5]],
+    2))         # 10
