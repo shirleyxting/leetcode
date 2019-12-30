@@ -17,21 +17,21 @@ class Solution:
         return rst
 
     def concatenate(self, n1: int, n2: int) -> int:
-        i = 1
-
+        """
+        eg: 30 + 12 = 3012
+        """
+        n3 = n2
         while n2 != 0:
-            n1 = n1 * 10 + n2 % 10 * i
+            n1 = n1 * 10
             n2 //= 10
-            i += 1
-
-        return n1
+        return n1 + n3
 
 
 if __name__ == "__main__":
     sol = Solution()
 
-    a = [12, 3]
-    b = [1, 2]
+    a = [12, 30]
+    b = [112, 8]
 
     print(sol.sum(a, b))
 
