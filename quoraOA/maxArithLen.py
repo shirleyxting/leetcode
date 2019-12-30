@@ -11,6 +11,19 @@ class Solution:
         return True
 
     def countMaxArithLen(self, a: List[int], b: List[int]):
+        """
+        find the maximal length of the resulting arithmetic progression
+        represented by array "a" that can be achieved.
+
+        If is is impossible to obtain an array forming an arithmetic progression, return -1
+
+        EG: for a = [0, 4, 8, 16] and b = [0, 2, 4, 12, 14, 20], maxArithmeticLength(a, b) = 6.
+        Ans: add b[3] = 12 and b[5] = 20 to "a" and obtain array [0, 4, 8, 12, 16, 20] with max length = 6
+        output: 6
+
+        for a = [5, 7, 13, 14] and b = [9, 11, 15]
+        output: -1
+        """
         st = set()
         for num in a:
             st.add(num)
@@ -39,7 +52,8 @@ class Solution:
         maxInsertNum = -1
         minimum, maximum = min(a[0], b[0]), max(a[len(a) - 1], b[len(b) - 1])
         for diff in diffs:
-            start, end = a[0] - diff * (a[0] - minimum)//diff, a[0] + diff * (maximum - a[0]) // diff
+            start = a[0] - diff * (a[0] - minimum)//diff
+            end = a[0] + diff * (maximum - a[0]) // diff
             endIdx = (a[len(a) - 1] - a[0])//diff
             insertNum = 0
             for i in range(endIdx):
@@ -71,12 +85,12 @@ class Solution:
 
 
 sol = Solution()
-a = [0, 4, 8, 16]
-b = [0,2,4,12,14,20]
+# a = [0, 4, 8, 16]
+# b = [0,2,4,12,14,20]
 a = [7, 13]
 b = [1, 10, 16]
-a = [20,22]
-b = [19, 21,23,24,26,28]
+# a = [20,22]
+# b = [19, 21,23,24,26,28]
 print(sol.countMaxArithLen(a, b))
 
 
