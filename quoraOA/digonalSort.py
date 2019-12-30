@@ -2,6 +2,9 @@ from typing import List
 
 class Solution:
     def helper(self, matrix:List[List[int]], start:List[int], dir: List[int]):
+        """
+        sort matrix to make each diagonal is incremental
+        """
         num_row = len(matrix)
         num_col = len(matrix[0])
         i, j = start
