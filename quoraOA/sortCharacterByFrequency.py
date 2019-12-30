@@ -9,6 +9,9 @@ class Solution:
         """
         :type s: str
         :rtype: str
+
+        s = "tree"
+        sort "s" by frequency --> 'eetr'
         """
         c1, c2 = Counter(s), {}
         for k,v in c1.items():

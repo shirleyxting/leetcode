@@ -13,7 +13,7 @@ class Solution:
                   [0,3,1]]
         output : 5
 
-        因为在matrix[0],  array的index 1到2区间出现了1 一次，
+        因为在matrix[0], array的index 1到2区间出现了1 一次，
         matrix[1], array的index 2到4区间出现2 两次。
         matrx[2], array的index 0到3区间出现1 两次
 

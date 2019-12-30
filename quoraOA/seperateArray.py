@@ -6,6 +6,10 @@ from typing import List
 class Solution:
 
     def seperateArray(self, array: List[int]) -> List[List[int]]:
+        """
+        separate array into 2 sub-arrays.
+        with each sub-array has unique values
+        """
 
         if array is None or len(array) % 2 != 0:
             return []
@@ -22,5 +26,5 @@ class Solution:
 
 
 sol = Solution()
-arr  =[1, 1, 1, 2,4, 5, 6, 7]
+arr  =[1, 1, 1, 2, 4, 5, 6, 7]
 print(sol.seperateArray(arr))

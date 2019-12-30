@@ -5,6 +5,10 @@ from typing import List
 class Solution:
 
     def findGoodTuple(self, nums: List[int]):
+        """
+        nums = [4, 6, 4, 4, 4, 4, 4]
+        find tuple (len=3) with only two unique items
+        """
         rst = 0
         for i in range(1, len(nums) - 1):
             if (nums[i] == nums[i - 1] and nums[i] != nums[i + 1])\

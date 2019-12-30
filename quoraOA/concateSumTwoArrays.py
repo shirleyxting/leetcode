@@ -6,6 +6,12 @@ from typing import List
 class Solution:
 
     def sum(self, a: List[int], b: List[int]) -> int:
+        """
+        eg: a = [12, 30], b = [112, 8]
+        a[0] + b[-1] = "128"
+        a[1] + b[-2] = "30112"
+        add: 128 + 30112 = 30240
+        """
         rst = 0
 
         if len(a) != len(b):

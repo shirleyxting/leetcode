@@ -6,6 +6,13 @@ from typing import List
 class Solution:
 
     def formTeam(self, k: int, players: List[int]):
+        """
+        k = 0
+        players = [-1, 0, 1, 2, -1, -4]
+
+        find three players in "players" to make sum = k
+        (three sum)
+        """
 
         sortedIdx = [i[0] for i in sorted(enumerate(players), key=lambda x: x[1])]
         players = sorted(players)

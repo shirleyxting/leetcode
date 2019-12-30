@@ -40,7 +40,7 @@ class Solution:
 
 
 if __name__ == "__main__":
-    sol = Solution();
+    sol = Solution()
     s = "hello world lio"
     keys = ["i", "e", "o", "l", "h"]
     print(sol.numOfWords(s, keys))

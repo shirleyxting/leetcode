@@ -14,6 +14,21 @@ class Solution:
         return rst
 
     def findFeature(self, a: List[int], b: List[int], query: List[List[int]]):
+        """
+        a = [1, 2, 3]
+        b = [3, 4]
+        query = [
+            [1, 5],
+            [1, 1, 1],
+            [1, 5]
+        ]
+
+        [1,5]: target = 5, find n1 in a, n2 in b, to make n1+n2=target,
+        output:number of possible (n1, n2) paris
+        [1,1,1]: change b[0] to 1
+
+
+        """
         rst: List[int] = []
         for list in query:
             if len(list) == 2:

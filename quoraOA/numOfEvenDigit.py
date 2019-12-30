@@ -20,5 +20,5 @@ class Solution:
         return count
 
 test = Solution()
-print(test.numEvenDigit(["13456", "2456", "661", "135", "235"]))
+print(test.numEvenDigit([13456, 2456, 661, 135, 235]))
 
