@@ -1,4 +1,4 @@
-# Last updated: 7/1/2026, 4:48:39 PM
+# Last updated: 7/1/2026, 4:55:16 PM
 1class Solution:
 2    # def numIslands(self, grid: List[List[str]]) -> int:
 3    #     # BFS
@@ -42,7 +42,7 @@
 41
 42
 43    # above codes has lots of issues
-44    def numIslands(self, grid: List[List[int]]) -> int:
+44    def numIslands(self, grid: List[List[str]]) -> int:
 45        res = 0
 46        m, n = len(grid), len(grid[0])
 47
@@ -55,27 +55,30 @@
 54        
 55        return res
 56    
-57    def expand(self, grid: List[List[int]], i: int, j: int):
+57    def expand(self, grid: List[List[str]], i: int, j: int):
 58        queue = deque()
 59        queue.append([i, j])
-60
-61        dirs = [[-1, 0], [1, 0], [0, -1], [0, 1]]
-62        m, n = len(grid), len(grid[0])
-63        while queue:
-64            i, j = queue.popleft()
-65            # check neighbors
-66            for d in dirs:
-67                p = i + d[0]
-68                q = j + d[1]
-69                if p >= 0 and p < m and q >= 0 and q < n and grid[p][q] == "1":
-70                    queue.append([p, q])
-71                    # mark as visited when pushing to queue, to avoid overlapping
-72                    grid[p][q] = "-1"
-73
-74        
-75            
+60        grid[i][j] = "-1" # 起点入队时，必须立刻标记为 "-1",否则邻居又把起点给重新塞回队列
+61
+62        dirs = [[-1, 0], [1, 0], [0, -1], [0, 1]]
+63        m, n = len(grid), len(grid[0])
+64        while queue:
+65            # 核心修改：使用新变量名 curr_i, curr_j，保护形参 i, j 不被篡改
+66            curr_i, curr_j = queue.popleft()
+67
+68            # check neighbors
+69            for d in dirs:
+70                p = curr_i + d[0]
+71                q = curr_j + d[1]
+72                if p >= 0 and p < m and q >= 0 and q < n and grid[p][q] == "1":
+73                    queue.append([p, q])
+74                    # mark as visited when pushing to queue, to avoid overlapping
+75                    grid[p][q] = "-1"
 76
-77            
-78
-79        
-80
+77        
+78            
+79
+80            
+81
+82        
+83
