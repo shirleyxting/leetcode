@@ -1,4 +1,4 @@
-# Last updated: 7/1/2026, 4:55:16 PM
+# Last updated: 7/1/2026, 4:58:17 PM
 1class Solution:
 2    # def numIslands(self, grid: List[List[str]]) -> int:
 3    #     # BFS
@@ -57,28 +57,31 @@
 56    
 57    def expand(self, grid: List[List[str]], i: int, j: int):
 58        queue = deque()
-59        queue.append([i, j])
-60        grid[i][j] = "-1" # 起点入队时，必须立刻标记为 "-1",否则邻居又把起点给重新塞回队列
-61
-62        dirs = [[-1, 0], [1, 0], [0, -1], [0, 1]]
-63        m, n = len(grid), len(grid[0])
-64        while queue:
-65            # 核心修改：使用新变量名 curr_i, curr_j，保护形参 i, j 不被篡改
-66            curr_i, curr_j = queue.popleft()
-67
-68            # check neighbors
-69            for d in dirs:
-70                p = curr_i + d[0]
-71                q = curr_j + d[1]
-72                if p >= 0 and p < m and q >= 0 and q < n and grid[p][q] == "1":
-73                    queue.append([p, q])
-74                    # mark as visited when pushing to queue, to avoid overlapping
-75                    grid[p][q] = "-1"
-76
-77        
-78            
+59        # 推荐使用 Tuple 存储坐标
+60        # 在 Python 中，queue.append((i, j))（元组）比 queue.append([i, j])（列表）更好。元组更轻量、内存开销小、生成速度快，在需要高频处理百万级节点的算法中，这个小习惯能帮你省下不少运行时间。
+61        queue.append((i, j))
+62        
+63        grid[i][j] = "-1" # 起点入队时，必须立刻标记为 "-1",否则邻居又把起点给重新塞回队列
+64
+65        dirs = [[-1, 0], [1, 0], [0, -1], [0, 1]]
+66        m, n = len(grid), len(grid[0])
+67        while queue:
+68            # 核心修改：使用新变量名 curr_i, curr_j，保护形参 i, j 不被篡改
+69            curr_i, curr_j = queue.popleft()
+70
+71            # check neighbors
+72            for d in dirs:
+73                p = curr_i + d[0]
+74                q = curr_j + d[1]
+75                if 0 <= p < m and 0 <= q < n and grid[p][q] == "1":
+76                    queue.append((p, q))
+77                    # mark as visited when pushing to queue, to avoid overlapping
+78                    grid[p][q] = "-1"
 79
-80            
-81
-82        
-83
+80        
+81            
+82
+83            
+84
+85        
+86
