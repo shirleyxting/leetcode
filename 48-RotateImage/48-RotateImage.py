@@ -1,4 +1,4 @@
-# Last updated: 8/18/2026, 6:44:10 PM
+# Last updated: 8/18/2026, 6:44:30 PM
 1class Solution:
 2    def rotate(self, matrix: List[List[int]]) -> None:
 3        """
@@ -19,11 +19,13 @@
 18                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
 19        
 20        # row-level reverse
-21        for row in matrix:
-22            l, r = 0, n-1
-23            while l < r:
-24                row[l], row[r] = row[r], row[l]
-25                l += 1
-26                r -=1
-27        
-28        return
+21        # for row in matrix:
+22        #     l, r = 0, n-1
+23        #     while l < r:
+24        #         row[l], row[r] = row[r], row[l]
+25        #         l += 1
+26        #         r -=1
+27        for row in matrix:
+28            row.reverse()
+29        
+30        return
