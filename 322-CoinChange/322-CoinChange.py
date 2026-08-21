@@ -1,57 +1,20 @@
-# Last updated: 8/16/2026, 9:50:28 PM
-class Solution:
-    # def coinChange(self, coins: List[int], amount: int) -> int:
-    #     # DFS (try every coin, recurse) would find the right answer but
-    #     # recomputes the same remaining amounts many times (overlapping
-    #     # subproblems) -> use DP (bottom-up) to compute each amount once
-    #     # dp[i] = fewest coins to make amount i
-    #     #       = min(dp[i - c] + 1) over every coin c <= i
-    #     # Time: O(amount * len(coins))   Space: O(amount)
-
-    #     dp = [math.inf] * (amount + 1)
-    #     dp[0] = 0  # base case: 0 coins needed to make amount 0
-
-    #     for i in range(amount + 1):
-    #         for c in coins:
-    #             if i >= c:
-    #                 # take coin c now (+1), plus however many coins
-    #                 # were needed for the remaining amount (i - c)
-    #                 dp[i] = min(dp[i - c] + 1, dp[i])
-
-    #     # still inf => no combination of coins can make up amount
-    #     if dp[amount] == math.inf:
-    #         return -1
-    #     return dp[amount]
-
-    # DFS, recursion
-    def coinChange(self, coins: List[int], amount: int) -> int:
-        dp = [math.inf] * (amount + 1)
-        
-        def dfs(dp: List[int], curr: int) -> int:
-            # dfs exit
-            if curr == 0:
-                return 0
-            if curr < 0:
-                return -1
-            
-            # to avoid overlapping calculations
-            if dp[curr] != math.inf:
-                return dp[curr]
-            
-            for c in coins:
-                temp = dfs(dp, curr - c)
-                if temp != -1:
-                    dp[curr] = min(dp[curr], temp + 1)
-
-            if dp[curr] == math.inf:
-                dp[curr] = -1
-
-            return dp[curr]
-
-        return dfs(dp, amount)
-
-        
-
-
-            
-        
+# Last updated: 8/21/2026, 2:00:28 PM
+1class Solution:
+2    def coinChange(self, coins: List[int], amount: int) -> int:
+3        # knapsack complete, item can be selected multiple times
+4        # dp[i][j]: for coins[:i], the min item combination, with sum = j
+5        #         = min(dp[i-1][j], dp[i][j-coins[i]] + 1)  (not use coin-i, use coin-i multiple times)
+6        # dp[i][j] only replies on dp[i-1] -> 2D to 1D
+7        #  dp[j], dp[j-coin]
+8        #  iterate j ASC in [coin, amount]
+9        #  ASC ensures when process dp[j], dp[j-coin] is already computed with curr row
+10        #   -> dp[i][j] = dp[i][j-coin]
+11
+12        dp = [float('inf')] * (amount + 1)
+13        dp[0] = 0  # dp[0][0], dp[1][0], dp[2][0], .. always = 0, do not pick any coin -> will reach sum=0
+14
+15        for coin in coins:
+16            for j in range(coin, amount + 1):
+17                dp[j] = min(dp[j], dp[j - coin] + 1)
+18        
+19        return dp[amount] if dp[amount] != float('inf') else -1
