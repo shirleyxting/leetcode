@@ -1,4 +1,4 @@
-# Last updated: 8/23/2026, 12:58:05 PM
+# Last updated: 8/23/2026, 1:00:05 PM
 1class Solution:
 2    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
 3        # sort nums, and pick next DIFF num (skip same values)
@@ -18,14 +18,18 @@
 17                # 去重核心：i > start（不是 i > 0）——只禁止"同一层for循环里横向选到相同数字"
 18                # 只有i > start时，才是"在同一层里，前一个兄弟分支已经试过某个值了，现在轮到试下一个候选值"，这时才需要跟"同一层的上一个候选值"比较去重。
 19                # 允许"同一条路径纵向连续选相同数字"（比如[2,2]这个子集本身是合法的，必须能生成）
-20                if i > start and nums[i] == nums[i-1]:
-21                    continue
-22                
-23                path.append(nums[i])    # select
-24                backtrack(i + 1)        # check next element
-25                path.pop()              # cancel selection
-26        
-27        backtrack(0)
-28        return res
-29
-30
+20
+21                # cause for [1,2`,2``], it will skip the 2`` selection from {subset=[1,2`], start=2}
+22                # so the skip should be: skip NEXT same value candidate
+23                # do not skip CURRENT candidate
+24                if i > start and nums[i] == nums[i-1]:
+25                    continue
+26                
+27                path.append(nums[i])    # select
+28                backtrack(i + 1)        # check next element
+29                path.pop()              # cancel selection
+30        
+31        backtrack(0)
+32        return res
+33
+34
