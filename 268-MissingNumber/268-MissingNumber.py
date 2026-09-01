@@ -1,4 +1,4 @@
-# Last updated: 8/31/2026, 10:47:01 PM
+# Last updated: 8/31/2026, 10:48:16 PM
 1class Solution:
 2    def missingNumber(self, nums: List[int]) -> int:
 3        # # XOR: nums ^ range(n) -> even occurence = 0, odd occurence = 1 -> the missing one
@@ -14,7 +14,8 @@
 13
 14
 15        # sum: sum(0,1,2,...n) - sum(nums) = missing
-16        target_sum = sum(list(range(len(nums) + 1)))
-17        # target_sum = (n * (n-1)) // 2
-18
-19        return target_sum - sum(nums)
+16        # target_sum = sum(list(range(len(nums) + 1)))
+17        n = len(nums)
+18        target_sum = (n * (n + 1)) // 2
+19
+20        return target_sum - sum(nums)
